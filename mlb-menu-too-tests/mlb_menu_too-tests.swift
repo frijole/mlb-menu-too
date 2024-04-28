@@ -1,14 +1,7 @@
-//
-//  mlb_menu_tooTests.swift
-//  mlb-menu-tooTests
-//
-//  Created by Ian on 4/28/24.
-//
-
 import XCTest
 @testable import mlb_menu_too
 
-final class mlb_menu_tooTests: XCTestCase {
+final class mlb_menu_too_tests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
