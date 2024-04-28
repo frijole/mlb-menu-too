@@ -1,4 +1,58 @@
 enum Fixtures {
+  static var gameInProgress: String =
+  """
+  {
+    "gamePk":747045,
+    "gameGuid":"9406f148-3b20-45c1-9901-d2e5b6054c47",
+    "link":"/api/v1.1/game/747045/feed/live",
+    "gameType":"R",
+    "season":"2024",
+    "gameDate":"2024-04-28T17:35:00Z",
+    "officialDate":"2024-04-28",
+    "status":{
+      "abstractGameState":"Live",
+      "codedGameState":"I",
+      "detailedState":"In Progress",
+      "statusCode":"I",
+      "startTimeTBD":false,
+      "abstractGameCode":"L"
+    },
+    "teams":{
+      "away":{
+        "leagueRecord":{"wins":11,"losses":17,"pct":".393"},
+        "score":5,
+        "team":{"id":133,"name":"Oakland Athletics","link":"/api/v1/teams/133"},
+        "splitSquad":false,"seriesNumber":9
+      },
+      "home":{
+        "leagueRecord":{"wins":17,"losses":9,"pct":".654"},
+        "score":6,
+        "team":{"id":110,"name":"Baltimore Orioles","link":"/api/v1/teams/110"},
+        "splitSquad":false,"seriesNumber":9
+      }
+    },
+    "venue":{"id":2,"name":"Oriole Park at Camden Yards","link":"/api/v1/venues/2"},
+    "content":{"link":"/api/v1/game/747045/content"},
+    "gameNumber":1,
+    "publicFacing":true,
+    "doubleHeader":"N",
+    "gamedayType":"P",
+    "tiebreaker":"N",
+    "calendarEventID":"14-747045-2024-04-28",
+    "seasonDisplay":"2024",
+    "dayNight":"day",
+    "scheduledInnings":9,
+    "reverseHomeAwayStatus":false,
+    "inningBreakLength":120,
+    "gamesInSeries":3,
+    "seriesGameNumber":3,
+    "seriesDescription":"Regular Season",
+    "recordSource":"S",
+    "ifNecessary":"N",
+    "ifNecessaryDescription":"Normal Game"
+  }
+  """
+  
   static var game: String =
     """
     {

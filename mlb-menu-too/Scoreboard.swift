@@ -19,7 +19,7 @@ struct Game: Decodable {
   //  "season":"2024",
   let season: String
   //  "gameDate":"2024-04-28T20:10:00Z",
-  let gameDate: String // make date
+  let gameDate: Date // make date
   //  "officialDate":"2024-04-28",
   let officialDate: String
 
@@ -58,15 +58,19 @@ struct Team: Decodable {
   //  "seriesNumber":9
   let teamID: Int
   let name: String
+  let score: Int?
   
   enum CodingKeys: String, CodingKey {
     case `id`
     case name
     case team
+    case score
   }
   
   init(from decoder: Decoder) throws {
     let values = try decoder.container(keyedBy: CodingKeys.self)
+    score = try values.decodeIfPresent(Int.self, forKey: .score)
+
     let team = try values.nestedContainer(keyedBy: CodingKeys.self, forKey: .team)
     name = try team.decode(String.self, forKey: .name)
     teamID = try team.decode(Int.self, forKey: .id)
