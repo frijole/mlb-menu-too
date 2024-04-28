@@ -35,6 +35,7 @@
 		3C953AD62BDEBC1E00E1B04C /* mlb-menu-too-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mlb-menu-too-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C953ADA2BDEBC1E00E1B04C /* mlb_menu_too_tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mlb_menu_too_tests.swift; sourceTree = "<group>"; };
 		3C953AF32BDEBC6500E1B04C /* Scoreboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scoreboard.swift; sourceTree = "<group>"; };
+		3C953AF52BDEC7FC00E1B04C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +80,7 @@
 				3C953AC82BDEBC1D00E1B04C /* AppDelegate.swift */,
 				3C953ACA2BDEBC1D00E1B04C /* ViewController.swift */,
 				3C953AF32BDEBC6500E1B04C /* Scoreboard.swift */,
+				3C953AF52BDEC7FC00E1B04C /* README.md */,
 				3C953ACC2BDEBC1E00E1B04C /* Assets.xcassets */,
 				3C953ACE2BDEBC1E00E1B04C /* Main.storyboard */,
 				3C953AD12BDEBC1E00E1B04C /* mlb_menu_too.entitlements */,
