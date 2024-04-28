@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C5007092BDF149C00093653 /* Teams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5007082BDF149C00093653 /* Teams.swift */; };
 		3C953AC92BDEBC1D00E1B04C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C953AC82BDEBC1D00E1B04C /* AppDelegate.swift */; };
 		3C953ACB2BDEBC1D00E1B04C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C953ACA2BDEBC1D00E1B04C /* ViewController.swift */; };
 		3C953ACD2BDEBC1E00E1B04C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C953ACC2BDEBC1E00E1B04C /* Assets.xcassets */; };
@@ -27,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3C5007082BDF149C00093653 /* Teams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Teams.swift; sourceTree = "<group>"; };
 		3C953AC52BDEBC1D00E1B04C /* mlb-menu-too.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mlb-menu-too.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C953AC82BDEBC1D00E1B04C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3C953ACA2BDEBC1D00E1B04C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 				3C953AC82BDEBC1D00E1B04C /* AppDelegate.swift */,
 				3C953ACA2BDEBC1D00E1B04C /* ViewController.swift */,
 				3C953AF32BDEBC6500E1B04C /* Scoreboard.swift */,
+				3C5007082BDF149C00093653 /* Teams.swift */,
 				3C953AF52BDEC7FC00E1B04C /* README.md */,
 				3C953ACC2BDEBC1E00E1B04C /* Assets.xcassets */,
 				3C953ACE2BDEBC1E00E1B04C /* Main.storyboard */,
@@ -199,6 +202,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C5007092BDF149C00093653 /* Teams.swift in Sources */,
 				3C953AF42BDEBC6500E1B04C /* Scoreboard.swift in Sources */,
 				3C953ACB2BDEBC1D00E1B04C /* ViewController.swift in Sources */,
 				3C953AC92BDEBC1D00E1B04C /* AppDelegate.swift in Sources */,
@@ -372,7 +376,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "info.frijole.mlb-menu-too";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -399,7 +403,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "info.frijole.mlb-menu-too";
 				PRODUCT_NAME = "$(TARGET_NAME)";

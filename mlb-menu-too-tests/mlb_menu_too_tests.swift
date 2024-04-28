@@ -8,7 +8,7 @@ final class mlb_menu_too_tests: XCTestCase {
     let decoder = JSONDecoder()
     decoder.dateDecodingStrategy = .iso8601
     let data = try XCTUnwrap(sample.data(using: .utf8))
-    let sampleGame = try decoder.decode(Game.self, from: data)
+    let sampleGame = try decoder.decode(Response.Game.self, from: data)
 
     XCTAssertNotNil(sampleGame)
     
@@ -16,6 +16,9 @@ final class mlb_menu_too_tests: XCTestCase {
 
     XCTAssertNil(sampleGame.teams.home.score)
     XCTAssertNil(sampleGame.teams.away.score)
+    
+    XCTAssertEqual(sampleGame.teams.home.name, .padres)
+    XCTAssertEqual(sampleGame.teams.away.name, .phillies)
   }
   
   func test_decode_game_in_progress() throws {
@@ -24,7 +27,7 @@ final class mlb_menu_too_tests: XCTestCase {
     let decoder = JSONDecoder()
     decoder.dateDecodingStrategy = .iso8601
     let data = try XCTUnwrap(sample.data(using: .utf8))
-    let sampleGame = try decoder.decode(Game.self, from: data)
+    let sampleGame = try decoder.decode(Response.Game.self, from: data)
 
     XCTAssertEqual(sampleGame.status.detailedState, "In Progress")
 
