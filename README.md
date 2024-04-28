@@ -8,35 +8,37 @@ The endpoint requires at least a `sportID` or `gamePk` parameter to provide more
 
 A sample request URL from the scoreboard website:
 ```
-  https://statsapi.mlb.com/api/v1/schedule?sportId=1&sportId=51&sportId=21&startDate=2024-04-28&endDate=2024-04-28
-  &timeZone=America/New_York&gameType=E&&gameType=S&&gameType=R&&gameType=F&&gameType=D&&gameType=L&&gameType=W
-  &&gameType=A&&gameType=C&language=en&leagueId=104&&leagueId=103&&leagueId=160&&leagueId=590&hydrate=team,
-  linescore(matchup,runners),xrefId,story,flags,statusFlags,broadcasts(all),venue(location),decisions,person,
-  probablePitcher,stats,game(content(media(epg),summary),tickets),seriesStatus(useOverride=true)
-  &sortBy=gameDate,gameStatus,gameType
+https://statsapi.mlb.com/api/v1/schedule?sportId=1&sportId=51&sportId=21
+&startDate=2024-04-28&endDate=2024-04-28&timeZone=America/New_York
+&gameType=E&&gameType=S&&gameType=R&&gameType=F&&gameType=D&&gameType=L&
+&gameType=W&&gameType=A&&gameType=C&language=en&leagueId=104&&leagueId=103&
+&leagueId=160&&leagueId=590&hydrate=team,linescore(matchup,runners),xrefId,
+story,flags,statusFlags,broadcasts(all),venue(location),decisions,person,
+probablePitcher,stats,game(content(media(epg),summary),tickets),
+seriesStatus(useOverride=true)&sortBy=gameDate,gameStatus,gameType
 ```
 
 * what do `sportId` values other than `1` mean?
 * what are the `gameType`: `E` `S` `R` `F` `D` `L` `W` `A` `C`
 * there are four `leagueId`: `104` `103` `160` `590`
 * `hydrate` seems useful, the options from the web request:
- - `team`
- - `linescore(matchup,runners)` additional params in `()`?
- - `xrefId`
- - `story`
- - `flags`
- - `broadcasts(all)`
- - `venue(location)`
- - `decisions`
- - `person`
- - `probablePitcher`
- - `stats`
- - `game(content(media(epg),summary),tickets)`
- - `seriesStatus(useOverride=true)`
+  - `team`
+  - `linescore(matchup,runners)` additional params in `()`?
+  - `xrefId`
+  - `story`
+  - `flags`
+  - `broadcasts(all)`
+  - `venue(location)`
+  - `decisions`
+  - `person`
+  - `probablePitcher`
+  - `stats`
+  - `game(content(media(epg),summary),tickets)`
+  - `seriesStatus(useOverride=true)`
 * `sortBy` takes at least
- - `gameDate`
- - `gameStatus`
- - `gameType`
+  - `gameDate`
+  - `gameStatus`
+  - `gameType`
 
 A sample game:
 ```
