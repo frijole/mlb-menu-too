@@ -31,4 +31,19 @@ final class mlb_menu_too_tests: XCTestCase {
     XCTAssertNotNil(sampleGame.teams.home.score)
     XCTAssertNotNil(sampleGame.teams.away.score)
   }
+  
+  func test_decode_gameday() throws {
+    let sample = Fixtures.maximumResponse
+    
+    let decoder = JSONDecoder()
+    decoder.dateDecodingStrategy = .iso8601
+    let data = try XCTUnwrap(sample.data(using: .utf8))
+    
+    let decodedSchedule = try decoder.decode(Response.self, from: data)
+    
+    XCTAssertNotNil(decodedSchedule)
+
+    let gameday = try XCTUnwrap(decodedSchedule.dates.first)
+    XCTAssertEqual(gameday.games.count, 15)
+  }
 }

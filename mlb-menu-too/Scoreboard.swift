@@ -1,12 +1,21 @@
 import Foundation
 
+struct Response: Decodable {
+//  "totalItems":15,
+//  "totalEvents":0,
+//  "totalGames":15,
+//  "totalGamesInProgress":6,
+//  "dates":[]
+  let dates: [Gameday]
+}
+
 struct Gameday: Decodable {
-  let date: String
+  let date: String // for display, not a date!
   let totalItems: Int
   let totalEvents: Int
   let totalGames: Int
   let totalGamesInProgress: Int
-  
+
   let games: [Game]
   let events: [Event]
 }
@@ -19,7 +28,7 @@ struct Game: Decodable {
   //  "season":"2024",
   let season: String
   //  "gameDate":"2024-04-28T20:10:00Z",
-  let gameDate: Date // make date
+  let gameDate: Date
   //  "officialDate":"2024-04-28",
   let officialDate: String
 
