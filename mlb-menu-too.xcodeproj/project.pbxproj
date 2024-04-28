@@ -13,6 +13,7 @@
 		3C953AD02BDEBC1E00E1B04C /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 3C953ACF2BDEBC1E00E1B04C /* Base */; };
 		3C953ADB2BDEBC1E00E1B04C /* mlb_menu_too_tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C953ADA2BDEBC1E00E1B04C /* mlb_menu_too_tests.swift */; };
 		3C953AF42BDEBC6500E1B04C /* Scoreboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C953AF32BDEBC6500E1B04C /* Scoreboard.swift */; };
+		3C953AF72BDED94800E1B04C /* Fixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C953AF62BDED94800E1B04C /* Fixtures.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		3C953ADA2BDEBC1E00E1B04C /* mlb_menu_too_tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mlb_menu_too_tests.swift; sourceTree = "<group>"; };
 		3C953AF32BDEBC6500E1B04C /* Scoreboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scoreboard.swift; sourceTree = "<group>"; };
 		3C953AF52BDEC7FC00E1B04C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		3C953AF62BDED94800E1B04C /* Fixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fixtures.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				3C953ADA2BDEBC1E00E1B04C /* mlb_menu_too_tests.swift */,
+				3C953AF62BDED94800E1B04C /* Fixtures.swift */,
 			);
 			path = "mlb-menu-too-tests";
 			sourceTree = "<group>";
@@ -207,6 +210,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C953ADB2BDEBC1E00E1B04C /* mlb_menu_too_tests.swift in Sources */,
+				3C953AF72BDED94800E1B04C /* Fixtures.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

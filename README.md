@@ -18,6 +18,13 @@ probablePitcher,stats,game(content(media(epg),summary),tickets),
 seriesStatus(useOverride=true)&sortBy=gameDate,gameStatus,gameType
 ```
 
+A basic URL: 
+```
+https://statsapi.mlb.com/api/v1/schedule?sportId=1
+&startDate=2024-04-28&endDate=2024-04-28
+```
+
+### notes
 * what do `sportId` values other than `1` mean?
 * what are the `gameType`: `E` `S` `R` `F` `D` `L` `W` `A` `C`
 * there are four `leagueId`: `104` `103` `160` `590`
@@ -104,8 +111,8 @@ A sample game:
 
 
 ## TODO
-* ???
+* a lot
 
 
 ## DONE?
-* nothing!
+* very little
