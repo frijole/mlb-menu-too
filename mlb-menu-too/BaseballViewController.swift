@@ -29,7 +29,7 @@ class BaseballViewController: NSViewController {
   func fetchData() {
     Task.detached {
       await self.scoreboard.fetch { [weak self] status in
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10) { [weak self] in
+        DispatchQueue.main.async { [weak self] in
           self?.status = status
         }
       }
@@ -82,7 +82,10 @@ extension BaseballViewController: NSTableViewDelegate {
       let game = responseStatus.dates.first?.games[row]
       let identifier = NSUserInterfaceItemIdentifier("TextCell")
       if let view = tableView.makeView(withIdentifier: identifier, owner: nil) as? NSTableCellView {
-        view.textField?.stringValue = game?.summary ?? "GAME ERROR"
+        guard let baseballView = view as? BaseballGameCellView else { return nil }
+        baseballView.leadingLogoView.image = game?.teams.away.info.logo
+        baseballView.trailingLogoView.image = game?.teams.home.info.logo
+        baseballView.textField?.stringValue = game?.summary ?? "ERROR"
         return view
       }
     }
@@ -92,5 +95,10 @@ extension BaseballViewController: NSTableViewDelegate {
 }
 
 extension Response.Game {
-  var summary: String { "\(teams.away.name.initials) @ \(teams.home.name.initials)" }
+  var summary: String { "\(teams.away.info.initials) @ \(teams.home.info.initials)" }
+}
+
+class BaseballGameCellView: NSTableCellView {
+  @IBOutlet var leadingLogoView: NSImageView!
+  @IBOutlet var trailingLogoView: NSImageView!
 }

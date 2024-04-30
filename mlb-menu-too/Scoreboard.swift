@@ -125,7 +125,7 @@ extension Response {
     //  "splitSquad":false,
     //  "seriesNumber":9
     let teamID: Int
-    let name: MLBTeam
+    let info: MLBTeam
     let score: Int?
     
     enum CodingKeys: String, CodingKey {
@@ -140,7 +140,7 @@ extension Response {
       score = try values.decodeIfPresent(Int.self, forKey: .score)
       
       let team = try values.nestedContainer(keyedBy: CodingKeys.self, forKey: .team)
-      name = try team.decode(MLBTeam.self, forKey: .name)
+      info = try team.decode(MLBTeam.self, forKey: .name)
       teamID = try team.decode(Int.self, forKey: .id)
     }
   }
