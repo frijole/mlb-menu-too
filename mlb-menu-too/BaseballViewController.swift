@@ -37,7 +37,7 @@ class BaseballViewController: NSViewController {
   }
   
   func updateSize() {
-    let contentSize = NSSize(width: view.frame.width, height: tableView.intrinsicContentSize.height + 8)
+    let contentSize = NSSize(width: view.frame.width, height: tableView.intrinsicContentSize.height) // + 8)
     view.setFrameSize(contentSize)
   }
 }
@@ -59,10 +59,10 @@ extension BaseballViewController: NSTableViewDelegate {
     switch status {
     case .loading:
       let identifier = NSUserInterfaceItemIdentifier("LoadingCell")
-      if let loadingView = tableView.makeView(withIdentifier: identifier, owner: nil) as? NSTableCellView {
-        loadingView.textField?.stringValue = "Loading..."
-        return loadingView
-      }
+      guard let view = tableView.makeView(withIdentifier: identifier, owner: nil) as? NSTableCellView,
+          let loadingView = view as? LoadingCellView else { return nil }
+      loadingView.spinner.startAnimation(nil)
+      return loadingView
 
     case .error:
       let identifier = NSUserInterfaceItemIdentifier("LoadingCell")
@@ -83,9 +83,10 @@ extension BaseballViewController: NSTableViewDelegate {
       let identifier = NSUserInterfaceItemIdentifier("TextCell")
       if let view = tableView.makeView(withIdentifier: identifier, owner: nil) as? NSTableCellView {
         guard let baseballView = view as? BaseballGameCellView else { return nil }
-        baseballView.leadingLogoView.image = game?.teams.away.info.logo
-        baseballView.trailingLogoView.image = game?.teams.home.info.logo
-        baseballView.textField?.stringValue = game?.summary ?? "ERROR"
+        baseballView.objectValue = game
+        // baseballView.leadingLogoView.image = game?.teams.away.info.logo
+        // baseballView.trailingLogoView.image = game?.teams.home.info.logo
+        // baseballView.textField?.stringValue = game?.summary ?? "ERROR"
         return view
       }
     }
@@ -94,11 +95,64 @@ extension BaseballViewController: NSTableViewDelegate {
   }
 }
 
+extension Response.Team {
+  var name: String { info.name }
+}
+
 extension Response.Game {
-  var summary: String { "\(teams.away.info.initials) @ \(teams.home.info.initials)" }
+  var summary: String {
+    if status.detailedState == "Scheduled" {
+      if status.startTimeTBD { return "TBD" }
+      return gameDate.formatted(date: .omitted, time: .shortened)
+    }
+
+    if let awayScore = teams.away.score, let homeScore = teams.home.score {
+      return "\(awayScore) - \(homeScore)"
+    }
+    
+    return "\(teams.away.info.initials) @ \(teams.home.info.initials)"
+  }
+}
+
+class LoadingCellView: NSTableCellView {
+  @IBOutlet var spinner: NSProgressIndicator!
 }
 
 class BaseballGameCellView: NSTableCellView {
   @IBOutlet var leadingLogoView: NSImageView!
   @IBOutlet var trailingLogoView: NSImageView!
+  
+  @IBOutlet var leadingScoreLabel: NSTextField!
+  @IBOutlet var trailingScoreLabel: NSTextField!
+  
+  
+  // @IBOutlet var segmentedControl: NSSegmentedControl!
+  
+  override var objectValue: Any? {
+    didSet {
+      guard let gameDate = objectValue as? Response.Game else { return }
+
+      leadingScoreLabel.isHidden = true
+      trailingScoreLabel.isHidden = true
+      
+      leadingLogoView.image = gameDate.teams.away.info.logo
+      trailingLogoView.image = gameDate.teams.home.info.logo
+      
+      if gameDate.status.detailedState == "Scheduled" {
+        if gameDate.status.startTimeTBD {
+          textField?.stringValue = "TBD"
+        } else {
+          textField?.stringValue = gameDate.gameDate.formatted(date: .omitted, time: .shortened)
+        }
+      } else if gameDate.status.detailedState == "In Progress" {
+        leadingScoreLabel.isHidden = false
+        trailingScoreLabel.isHidden = false
+        textField?.stringValue = "▲ 2nd" // get live inning from somewhere
+        leadingScoreLabel.stringValue = gameDate.teams.away.score.map { "\($0)" } ?? "\(Int.random(in: 2...12))"
+        trailingScoreLabel.stringValue = gameDate.teams.home.score.map { "\($0)" } ?? "\(Int.random(in: 2...12))"
+      } else {
+        textField?.stringValue = "WAT"
+      }
+    }
+  }
 }

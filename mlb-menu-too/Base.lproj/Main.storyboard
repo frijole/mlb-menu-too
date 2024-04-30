@@ -735,7 +735,7 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView identifier="TextCell" id="nnR-Jl-Djx" customClass="BaseballGameCellView" customModule="mlb_menu_too" customModuleProvider="target">
+                                                        <tableCellView identifier="TextCell" focusRingType="none" id="nnR-Jl-Djx" customClass="BaseballGameCellView" customModule="mlb_menu_too" customModuleProvider="target">
                                                             <rect key="frame" x="8" y="0.0" width="231" height="48"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -746,18 +746,26 @@
                                                                             <rect key="frame" x="50" y="14" width="131" height="21"/>
                                                                             <textFieldCell key="cell" controlSize="large" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="center" title="Label Text" usesSingleLineMode="YES" id="cDF-QZ-1HQ">
                                                                                 <font key="font" textStyle="title2" name=".SFNS-Regular"/>
+                                                                                <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                                <color key="backgroundColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
+                                                                            </textFieldCell>
+                                                                        </textField>
+                                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="LOQ-jH-fmy">
+                                                                            <rect key="frame" x="157" y="14" width="21" height="21"/>
+                                                                            <textFieldCell key="cell" controlSize="large" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="center" title="H" usesSingleLineMode="YES" id="cP3-yj-7ar">
+                                                                                <font key="font" metaFont="system" size="18"/>
                                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
                                                                         </textField>
-                                                                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="E4c-ZR-gYM">
-                                                                            <rect key="frame" x="187" y="6" width="36" height="36"/>
-                                                                            <constraints>
-                                                                                <constraint firstAttribute="height" constant="36" id="gNb-7m-Cmn"/>
-                                                                                <constraint firstAttribute="width" constant="36" id="pcE-FA-wP4"/>
-                                                                            </constraints>
-                                                                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="oak" id="qum-7h-Tmq"/>
-                                                                        </imageView>
+                                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="VDI-DP-mrt">
+                                                                            <rect key="frame" x="54" y="14" width="20" height="21"/>
+                                                                            <textFieldCell key="cell" controlSize="large" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="center" title="A" usesSingleLineMode="YES" id="RZV-0K-gQf">
+                                                                                <font key="font" metaFont="system" size="18"/>
+                                                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                                <color key="backgroundColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
+                                                                            </textFieldCell>
+                                                                        </textField>
                                                                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AR2-CU-Qra">
                                                                             <rect key="frame" x="8" y="6" width="36" height="36"/>
                                                                             <constraints>
@@ -766,15 +774,28 @@
                                                                             </constraints>
                                                                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="phi" id="mGH-rC-rFM"/>
                                                                         </imageView>
+                                                                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="E4c-ZR-gYM">
+                                                                            <rect key="frame" x="187" y="6" width="36" height="36"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="height" constant="36" id="gNb-7m-Cmn"/>
+                                                                                <constraint firstAttribute="width" constant="36" id="pcE-FA-wP4"/>
+                                                                            </constraints>
+                                                                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="oak" id="qum-7h-Tmq"/>
+                                                                        </imageView>
                                                                     </subviews>
                                                                     <constraints>
-                                                                        <constraint firstItem="E4c-ZR-gYM" firstAttribute="leading" secondItem="E0Y-tr-DyT" secondAttribute="trailing" constant="8" symbolic="YES" id="6Zh-2j-g4M"/>
                                                                         <constraint firstItem="E4c-ZR-gYM" firstAttribute="centerY" secondItem="DNr-XY-xPa" secondAttribute="centerY" id="7ue-be-P1g"/>
                                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="48" id="BRx-Ce-y6p"/>
+                                                                        <constraint firstItem="VDI-DP-mrt" firstAttribute="centerY" secondItem="AR2-CU-Qra" secondAttribute="centerY" id="LSJ-SY-mMC"/>
+                                                                        <constraint firstItem="VDI-DP-mrt" firstAttribute="centerX" secondItem="AR2-CU-Qra" secondAttribute="trailing" constant="20" id="Law-UJ-fAz"/>
+                                                                        <constraint firstItem="LOQ-jH-fmy" firstAttribute="centerY" secondItem="E4c-ZR-gYM" secondAttribute="centerY" id="MgS-TY-reA"/>
                                                                         <constraint firstItem="AR2-CU-Qra" firstAttribute="leading" secondItem="DNr-XY-xPa" secondAttribute="leading" constant="8" id="OEs-Bb-JdR"/>
                                                                         <constraint firstAttribute="height" constant="48" id="V4H-Cq-9bY"/>
                                                                         <constraint firstItem="AR2-CU-Qra" firstAttribute="centerY" secondItem="DNr-XY-xPa" secondAttribute="centerY" id="dhU-Ae-Ovm"/>
                                                                         <constraint firstItem="E0Y-tr-DyT" firstAttribute="centerY" secondItem="DNr-XY-xPa" secondAttribute="centerY" id="fGZ-uN-Aag"/>
+                                                                        <constraint firstItem="E4c-ZR-gYM" firstAttribute="leading" secondItem="LOQ-jH-fmy" secondAttribute="centerX" constant="20" id="hc3-w5-p4y"/>
+                                                                        <constraint firstItem="LOQ-jH-fmy" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="VDI-DP-mrt" secondAttribute="trailing" constant="8" symbolic="YES" id="lNP-BI-LZs"/>
+                                                                        <constraint firstItem="E0Y-tr-DyT" firstAttribute="centerX" secondItem="DNr-XY-xPa" secondAttribute="centerX" id="oQP-wh-BXj"/>
                                                                         <constraint firstItem="E0Y-tr-DyT" firstAttribute="leading" secondItem="AR2-CU-Qra" secondAttribute="trailing" constant="8" symbolic="YES" id="x7p-cN-wEM"/>
                                                                         <constraint firstAttribute="trailing" secondItem="E4c-ZR-gYM" secondAttribute="trailing" constant="8" id="zce-jo-BOQ"/>
                                                                     </constraints>
@@ -788,19 +809,21 @@
                                                             </constraints>
                                                             <connections>
                                                                 <outlet property="leadingLogoView" destination="AR2-CU-Qra" id="m2D-Vg-enk"/>
+                                                                <outlet property="leadingScoreLabel" destination="VDI-DP-mrt" id="XDx-0N-AXm"/>
                                                                 <outlet property="textField" destination="E0Y-tr-DyT" id="kRP-cX-cru"/>
                                                                 <outlet property="trailingLogoView" destination="E4c-ZR-gYM" id="C7w-5I-YcC"/>
+                                                                <outlet property="trailingScoreLabel" destination="LOQ-jH-fmy" id="ytU-7F-7Zo"/>
                                                             </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="LoadingCell" id="aV9-Fm-dlq">
+                                                        <tableCellView identifier="LoadingCell" id="aV9-Fm-dlq" customClass="LoadingCellView" customModule="mlb_menu_too" customModuleProvider="target">
                                                             <rect key="frame" x="8" y="48" width="231" height="48"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="eB1-X8-jTi">
                                                                     <rect key="frame" x="0.0" y="0.0" width="231" height="48"/>
                                                                     <subviews>
-                                                                        <progressIndicator maxValue="100" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="X5c-fa-AfU">
-                                                                            <rect key="frame" x="100" y="8" width="32" height="32"/>
+                                                                        <progressIndicator maxValue="100" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="X5c-fa-AfU">
+                                                                            <rect key="frame" x="108" y="16" width="16" height="16"/>
                                                                         </progressIndicator>
                                                                     </subviews>
                                                                     <constraints>
@@ -816,6 +839,9 @@
                                                                 <constraint firstAttribute="bottom" secondItem="eB1-X8-jTi" secondAttribute="bottom" id="amC-Ji-N3Y"/>
                                                                 <constraint firstItem="eB1-X8-jTi" firstAttribute="leading" secondItem="aV9-Fm-dlq" secondAttribute="leading" id="zYW-1n-1mZ"/>
                                                             </constraints>
+                                                            <connections>
+                                                                <outlet property="spinner" destination="X5c-fa-AfU" id="UYP-yL-9Br"/>
+                                                            </connections>
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
