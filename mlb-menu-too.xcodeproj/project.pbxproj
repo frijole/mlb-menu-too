@@ -8,8 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		3C5007092BDF149C00093653 /* Teams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5007082BDF149C00093653 /* Teams.swift */; };
+		3C50070B2BE0802A00093653 /* Baseball.icns in Resources */ = {isa = PBXBuildFile; fileRef = 3C50070A2BE0802A00093653 /* Baseball.icns */; };
 		3C953AC92BDEBC1D00E1B04C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C953AC82BDEBC1D00E1B04C /* AppDelegate.swift */; };
-		3C953ACB2BDEBC1D00E1B04C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C953ACA2BDEBC1D00E1B04C /* ViewController.swift */; };
+		3C953ACB2BDEBC1D00E1B04C /* BaseballViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C953ACA2BDEBC1D00E1B04C /* BaseballViewController.swift */; };
 		3C953ACD2BDEBC1E00E1B04C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C953ACC2BDEBC1E00E1B04C /* Assets.xcassets */; };
 		3C953AD02BDEBC1E00E1B04C /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 3C953ACF2BDEBC1E00E1B04C /* Base */; };
 		3C953ADB2BDEBC1E00E1B04C /* mlb_menu_too_tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C953ADA2BDEBC1E00E1B04C /* mlb_menu_too_tests.swift */; };
@@ -29,9 +30,11 @@
 
 /* Begin PBXFileReference section */
 		3C5007082BDF149C00093653 /* Teams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Teams.swift; sourceTree = "<group>"; };
+		3C50070A2BE0802A00093653 /* Baseball.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Baseball.icns; sourceTree = "<group>"; };
+		3C50070C2BE0804200093653 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		3C953AC52BDEBC1D00E1B04C /* mlb-menu-too.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mlb-menu-too.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C953AC82BDEBC1D00E1B04C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3C953ACA2BDEBC1D00E1B04C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3C953ACA2BDEBC1D00E1B04C /* BaseballViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseballViewController.swift; sourceTree = "<group>"; };
 		3C953ACC2BDEBC1E00E1B04C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3C953ACF2BDEBC1E00E1B04C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3C953AD12BDEBC1E00E1B04C /* mlb_menu_too.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = mlb_menu_too.entitlements; sourceTree = "<group>"; };
@@ -81,11 +84,13 @@
 		3C953AC72BDEBC1D00E1B04C /* mlb-menu-too */ = {
 			isa = PBXGroup;
 			children = (
+				3C50070C2BE0804200093653 /* Info.plist */,
 				3C953AC82BDEBC1D00E1B04C /* AppDelegate.swift */,
-				3C953ACA2BDEBC1D00E1B04C /* ViewController.swift */,
+				3C953ACA2BDEBC1D00E1B04C /* BaseballViewController.swift */,
 				3C953AF32BDEBC6500E1B04C /* Scoreboard.swift */,
 				3C5007082BDF149C00093653 /* Teams.swift */,
 				3C953AF52BDEC7FC00E1B04C /* README.md */,
+				3C50070A2BE0802A00093653 /* Baseball.icns */,
 				3C953ACC2BDEBC1E00E1B04C /* Assets.xcassets */,
 				3C953ACE2BDEBC1E00E1B04C /* Main.storyboard */,
 				3C953AD12BDEBC1E00E1B04C /* mlb_menu_too.entitlements */,
@@ -184,6 +189,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C953ACD2BDEBC1E00E1B04C /* Assets.xcassets in Resources */,
+				3C50070B2BE0802A00093653 /* Baseball.icns in Resources */,
 				3C953AD02BDEBC1E00E1B04C /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -204,7 +210,7 @@
 			files = (
 				3C5007092BDF149C00093653 /* Teams.swift in Sources */,
 				3C953AF42BDEBC6500E1B04C /* Scoreboard.swift in Sources */,
-				3C953ACB2BDEBC1D00E1B04C /* ViewController.swift in Sources */,
+				3C953ACB2BDEBC1D00E1B04C /* BaseballViewController.swift in Sources */,
 				3C953AC92BDEBC1D00E1B04C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -361,15 +367,15 @@
 		3C953AEB2BDEBC1E00E1B04C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "mlb-menu-too/mlb_menu_too.entitlements";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = W27P2Y376L;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "mlb-menu-too/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "MLB Menu ᵗᵒᵒ";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
@@ -390,15 +396,15 @@
 		3C953AEC2BDEBC1E00E1B04C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "mlb-menu-too/mlb_menu_too.entitlements";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = W27P2Y376L;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "mlb-menu-too/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "MLB Menu ᵗᵒᵒ";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;

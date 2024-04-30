@@ -1,6 +1,6 @@
 import Cocoa
 
-class ViewController: NSViewController {
+class BaseballViewController: NSViewController {
   @IBOutlet var tableView: NSTableView!
   
   var startedLoading: Bool = false
@@ -10,50 +10,52 @@ class ViewController: NSViewController {
   var status: Scoreboard.Status = .idle {
     didSet {
       tableView.reloadData()
-      updateWindowSize()
+      updateSize()
     }
-  }
-
-  override func viewWillAppear() {
-    super.viewWillAppear()
-    updateWindowSize()
   }
   
-  override func viewDidAppear() {
-    super.viewDidAppear()
-    if startedLoading == false {
-      startedLoading = true
-      status = .loading
-      fetchData()
-    }
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    updateSize()
+  }
+
+  public func startLoading() {
+    guard startedLoading == false else { return }
+    startedLoading = true
+    status = .loading
+    fetchData()
   }
 
   func fetchData() {
     Task.detached {
       await self.scoreboard.fetch { [weak self] status in
-        DispatchQueue.main.async { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10) { [weak self] in
           self?.status = status
         }
       }
     }
   }
   
-  func updateWindowSize() {
+  func updateSize() {
     let contentSize = NSSize(width: view.frame.width, height: tableView.intrinsicContentSize.height + 8)
-    view.window?.setContentSize(contentSize)
+    view.setFrameSize(contentSize)
   }
 }
 
-extension ViewController: NSTableViewDataSource {
+extension BaseballViewController: NSTableViewDataSource {
   func numberOfRows(in tableView: NSTableView) -> Int {
     if case .loaded = status { return scoreboard.games.count }
     return 1
   }
 }
 
-extension ViewController: NSTableViewDelegate {
+extension BaseballViewController: NSTableViewDelegate {
+  func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
+    print("should select row \(row) in \(tableView)?")
+    return false
+  }
+  
   func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-
     switch status {
     case .loading:
       let identifier = NSUserInterfaceItemIdentifier("LoadingCell")
