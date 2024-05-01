@@ -43,6 +43,7 @@
 		3C953AF32BDEBC6500E1B04C /* Scoreboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scoreboard.swift; sourceTree = "<group>"; };
 		3C953AF52BDEC7FC00E1B04C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		3C953AF62BDED94800E1B04C /* Fixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fixtures.swift; sourceTree = "<group>"; };
+		3CAE03B72BE2706D00C61EFA /* Developer.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Developer.xcconfig; path = ../Developer.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +94,7 @@
 				3C50070A2BE0802A00093653 /* Baseball.icns */,
 				3C953ACC2BDEBC1E00E1B04C /* Assets.xcassets */,
 				3C953ACE2BDEBC1E00E1B04C /* Main.storyboard */,
+				3CAE03B72BE2706D00C61EFA /* Developer.xcconfig */,
 				3C953AD12BDEBC1E00E1B04C /* mlb_menu_too.entitlements */,
 			);
 			path = "mlb-menu-too";
@@ -248,6 +250,7 @@
 /* Begin XCBuildConfiguration section */
 		3C953AE82BDEBC1E00E1B04C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3CAE03B72BE2706D00C61EFA /* Developer.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -311,6 +314,7 @@
 		};
 		3C953AE92BDEBC1E00E1B04C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3CAE03B72BE2706D00C61EFA /* Developer.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -373,7 +377,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = W27P2Y376L;
+				DEVELOPMENT_TEAM = "$(PRIVATE_DEVELOPMENT_TEAM)";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "mlb-menu-too/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "MLB Menu ᵗᵒᵒ";
@@ -402,7 +406,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = W27P2Y376L;
+				DEVELOPMENT_TEAM = "$(PRIVATE_DEVELOPMENT_TEAM)";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "mlb-menu-too/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "MLB Menu ᵗᵒᵒ";
