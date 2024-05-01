@@ -63,7 +63,7 @@ extension BaseballViewController: NSTableViewDelegate {
     print("should select row \(row) in \(tableView)?")
     return false
   }
-  
+    
   func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
     switch status {
     case .loading:
@@ -138,6 +138,11 @@ class BaseballGameCellView: NSTableCellView {
     didSet {
       guard let gameDate = objectValue as? Response.Game else { return }
 
+      let tooltip = gameDate.tooltip
+      leadingLogoView.toolTip = tooltip
+      textField?.toolTip = tooltip
+      trailingLogoView.toolTip = tooltip
+      
       leadingScoreLabel.isHidden = true
       trailingScoreLabel.isHidden = true
       
@@ -176,5 +181,19 @@ class BaseballGameCellView: NSTableCellView {
         textField?.stringValue = "WAT"
       }
     }
+  }
+}
+
+extension Response.Game {
+  var tooltip: String {
+    return [
+      teams.away.name,
+    " vs ",
+      teams.home.name,
+    "\n",
+      gameDate.formatted(date: .omitted, time: .shortened),
+    " at ",
+      venue.name
+    ].joined()
   }
 }
