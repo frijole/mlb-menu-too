@@ -42,7 +42,7 @@ class Scoreboard {
       let decoder = JSONDecoder()
       decoder.dateDecodingStrategy = .iso8601
       let content = try decoder.decode(Response.self, from: data)
-      print("got json: \(String(data: data, encoding: .utf8) ?? "none?")")
+      // print("got json: \(String(data: data, encoding: .utf8) ?? "none?")")
       // print("decoded content? \(content)")
       status = .loaded(content)
       completion(.loaded(content))
@@ -55,19 +55,22 @@ class Scoreboard {
   
   var dateFormatter: DateFormatter = {
     let formatter = DateFormatter()
-    formatter.dateFormat = "startDate=YYYY-MM-DD&endDate=YYYY-MM-DD"
+    // formatter.dateFormat = "startDate=YYYY-MM-DD&endDate=YYYY-MM-DD"
+    formatter.dateFormat = "YYYY-MM-dd"
     return formatter
   }()
   
   var requestAddress: String {
-    return "https://statsapi.mlb.com/api/v1/schedule?sportId=1&"
-      + dateFormatter.string(from: Date())
-      // + "&hydrate=team,linescore(matchup,runners),person,stats,seriesStatus(useOverride=true),venue(location),stats,game"
-      // + "&hydrate=team,linescore(matchup,runners),xrefId,story,flags,statusFlags,broadcasts(all),venue(location),decisions,person,probablePitcher,stats,game(content(media(epg),summary),tickets),seriesStatus(useOverride=true)"
-      // + "&sortBy=gameDate,gameStatus,gameType"
-
-      // straight from production
-      + "&hydrate=team,linescore(matchup,runners),xrefId,story,flags,statusFlags,broadcasts(all),venue(location),decisions,person,probablePitcher,stats,game(content(media(epg),summary),tickets),seriesStatus(useOverride=true)&sortBy=gameDate,gameStatus,gameType"
+    let dateString = dateFormatter.string(from: Date())
+    
+    return "https://statsapi.mlb.com/api/v1/schedule?sportId=1&" +
+    "startDate=\(dateString)&endDate=\(dateString)" +
+    // + "&hydrate=team,linescore(matchup,runners),person,stats,seriesStatus(useOverride=true),venue(location),stats,game"
+    // + "&hydrate=team,linescore(matchup,runners),xrefId,story,flags,statusFlags,broadcasts(all),venue(location),decisions,person,probablePitcher,stats,game(content(media(epg),summary),tickets),seriesStatus(useOverride=true)"
+    // + "&sortBy=gameDate,gameStatus,gameType"
+    
+    // straight from production
+    "&hydrate=team,linescore(matchup,runners),xrefId,story,flags,statusFlags,broadcasts(all),venue(location),decisions,person,probablePitcher,stats,game(content(media(epg),summary),tickets),seriesStatus(useOverride=true)&sortBy=gameDate,gameStatus,gameType"
   }
 }
 
@@ -291,6 +294,7 @@ extension Response {
     case top = "Top"
     case middle = "Middle"
     case bottom = "Bottom"
+    case end = "End"
     
     var shortName: String {
       switch self {
@@ -300,6 +304,8 @@ extension Response {
         return "Mid"
       case .bottom:
         return "Bot"
+      case .end:
+        return "End"
       }
     }
   }

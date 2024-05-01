@@ -1,5 +1,11 @@
 import Cocoa
 
+extension BaseballViewController: NSMenuDelegate {
+  func menuWillOpen(_ menu: NSMenu) {
+    startLoading()
+  }
+}
+
 class BaseballViewController: NSViewController {
   @IBOutlet var tableView: NSTableView!
   
@@ -11,6 +17,7 @@ class BaseballViewController: NSViewController {
     didSet {
       tableView.reloadData()
       updateSize()
+      startedLoading = false
     }
   }
   
@@ -22,7 +29,9 @@ class BaseballViewController: NSViewController {
   public func startLoading() {
     guard startedLoading == false else { return }
     startedLoading = true
-    status = .loading
+    if case .idle = status {
+      status = .loading
+    }
     fetchData()
   }
 
@@ -84,9 +93,6 @@ extension BaseballViewController: NSTableViewDelegate {
       if let view = tableView.makeView(withIdentifier: identifier, owner: nil) as? NSTableCellView {
         guard let baseballView = view as? BaseballGameCellView else { return nil }
         baseballView.objectValue = game
-        // baseballView.leadingLogoView.image = game?.teams.away.info.logo
-        // baseballView.trailingLogoView.image = game?.teams.home.info.logo
-        // baseballView.textField?.stringValue = game?.summary ?? "ERROR"
         return view
       }
     }
@@ -162,8 +168,10 @@ class BaseballGameCellView: NSTableCellView {
         textField?.stringValue = "Final"
         leadingScoreLabel.stringValue = gameDate.teams.away.score.map { "\($0)" } ?? "\(Int.random(in: 2...12))"
         trailingScoreLabel.stringValue = gameDate.teams.home.score.map { "\($0)" } ?? "\(Int.random(in: 2...12))"
-      } else if gameDate.status.detailedState == "Pre-Game" {
+      } else if gameDate.status.detailedState == "Pre-Game" || gameDate.status.detailedState == "Warmup" {
         textField?.stringValue = gameDate.gameDate.formatted(date: .omitted, time: .shortened)
+      } else if gameDate.status.detailedState == "Delayed Start" {
+        textField?.stringValue = "↻" + gameDate.gameDate.formatted(date: .omitted, time: .shortened)
       } else {
         textField?.stringValue = "WAT"
       }

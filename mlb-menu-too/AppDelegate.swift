@@ -17,6 +17,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     let baseballMenu = NSMenu(title: "⚾️")
     statusBarItem.menu = baseballMenu
+    baseballMenu.delegate = viewController
 
     let baseballMenuItem = NSMenuItem(title: "beisbol", action: nil, keyEquivalent: "")
     baseballMenuItem.view = viewController.view
