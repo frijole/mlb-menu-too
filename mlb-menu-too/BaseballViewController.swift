@@ -147,9 +147,23 @@ class BaseballGameCellView: NSTableCellView {
       } else if gameDate.status.detailedState == "In Progress" {
         leadingScoreLabel.isHidden = false
         trailingScoreLabel.isHidden = false
-        textField?.stringValue = "▲ 2nd" // get live inning from somewhere
+        
+        var inningString = "???"
+        if let linescore = gameDate.linescore {
+          inningString = [linescore.inningState.shortName, linescore.currentInningOrdinal].joined(separator: " ")
+          // inningString = [( linescore.isTopInning ? "▲" : "▼" ), linescore.currentInningOrdinal].joined(separator: " ")
+        }
+        textField?.stringValue = inningString
         leadingScoreLabel.stringValue = gameDate.teams.away.score.map { "\($0)" } ?? "\(Int.random(in: 2...12))"
         trailingScoreLabel.stringValue = gameDate.teams.home.score.map { "\($0)" } ?? "\(Int.random(in: 2...12))"
+      } else if gameDate.status.detailedState == "Game Over" || gameDate.status.detailedState == "Final" {
+        leadingScoreLabel.isHidden = false
+        trailingScoreLabel.isHidden = false
+        textField?.stringValue = "Final"
+        leadingScoreLabel.stringValue = gameDate.teams.away.score.map { "\($0)" } ?? "\(Int.random(in: 2...12))"
+        trailingScoreLabel.stringValue = gameDate.teams.home.score.map { "\($0)" } ?? "\(Int.random(in: 2...12))"
+      } else if gameDate.status.detailedState == "Pre-Game" {
+        textField?.stringValue = gameDate.gameDate.formatted(date: .omitted, time: .shortened)
       } else {
         textField?.stringValue = "WAT"
       }

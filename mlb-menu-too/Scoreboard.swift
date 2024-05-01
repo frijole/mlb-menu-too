@@ -46,8 +46,8 @@ class Scoreboard {
       // print("decoded content? \(content)")
       status = .loaded(content)
       completion(.loaded(content))
-    } catch {
-      print("caught error??")
+    } catch let error {
+      print("caught error: \(error)")
       status = .error
       completion(.error)
     }
@@ -62,9 +62,12 @@ class Scoreboard {
   var requestAddress: String {
     return "https://statsapi.mlb.com/api/v1/schedule?sportId=1&"
       + dateFormatter.string(from: Date())
-      // + "hydrate=team,person,stats,seriesStatus(useOverride=true),linescore(matchup,runners)"
-      + "hydrate=team,linescore(matchup,runners),xrefId,story,flags,statusFlags,broadcasts(all),venue(location),decisions,person,probablePitcher,stats,game(content(media(epg),summary),tickets),seriesStatus(useOverride=true)"
-      + "&sortBy=gameDate,gameStatus,gameType"
+      // + "&hydrate=team,linescore(matchup,runners),person,stats,seriesStatus(useOverride=true),venue(location),stats,game"
+      // + "&hydrate=team,linescore(matchup,runners),xrefId,story,flags,statusFlags,broadcasts(all),venue(location),decisions,person,probablePitcher,stats,game(content(media(epg),summary),tickets),seriesStatus(useOverride=true)"
+      // + "&sortBy=gameDate,gameStatus,gameType"
+
+      // straight from production
+      + "&hydrate=team,linescore(matchup,runners),xrefId,story,flags,statusFlags,broadcasts(all),venue(location),decisions,person,probablePitcher,stats,game(content(media(epg),summary),tickets),seriesStatus(useOverride=true)&sortBy=gameDate,gameStatus,gameType"
   }
 }
 
@@ -115,6 +118,8 @@ extension Response {
     let teams: Teams
     let venue: Venue
     
+    let linescore: Linescore?
+    
     // more (when hydrated?)
     let gameNumber: Int
     let publicFacing: Bool
@@ -133,6 +138,69 @@ extension Response {
     let recordSource: String
     let ifNecessary: String // convert Y/N to bool
     let ifNecessaryDescription: String
+    
+    enum CodingKeys: CodingKey {
+      case gameType
+      case season
+      case gameDate
+      case officialDate
+      case status
+      case teams
+      case venue
+      case linescore
+      case gameNumber
+      case publicFacing
+      case doubleHeader
+      case gamedayType
+      case tiebreaker
+      case calendarEventID
+      case seasonDisplay
+      case dayNight
+      case scheduledInnings
+      case reverseHomeAwayStatus
+      case inningBreakLength
+      case gamesInSeries
+      case seriesGameNumber
+      case seriesDescription
+      case recordSource
+      case ifNecessary
+      case ifNecessaryDescription
+    }
+    
+    init(from decoder: any Decoder) throws {
+      let container: KeyedDecodingContainer<Response.Game.CodingKeys> = try decoder.container(keyedBy: Game.CodingKeys.self)
+      self.gameType = try container.decode(String.self, forKey: Response.Game.CodingKeys.gameType)
+      self.season = try container.decode(String.self, forKey: Response.Game.CodingKeys.season)
+      self.gameDate = try container.decode(Date.self, forKey: Response.Game.CodingKeys.gameDate)
+      self.officialDate = try container.decode(String.self, forKey: Response.Game.CodingKeys.officialDate)
+      self.status = try container.decode(Response.Status.self, forKey: Response.Game.CodingKeys.status)
+      self.teams = try container.decode(Response.Teams.self, forKey: Response.Game.CodingKeys.teams)
+      self.venue = try container.decode(Response.Venue.self, forKey: Response.Game.CodingKeys.venue)
+      self.gameNumber = try container.decode(Int.self, forKey: Response.Game.CodingKeys.gameNumber)
+      self.publicFacing = try container.decode(Bool.self, forKey: Response.Game.CodingKeys.publicFacing)
+      self.doubleHeader = try container.decode(String.self, forKey: Response.Game.CodingKeys.doubleHeader)
+      self.gamedayType = try container.decode(String.self, forKey: Response.Game.CodingKeys.gamedayType)
+      self.tiebreaker = try container.decode(String.self, forKey: Response.Game.CodingKeys.tiebreaker)
+      self.calendarEventID = try container.decode(String.self, forKey: Response.Game.CodingKeys.calendarEventID)
+      self.seasonDisplay = try container.decode(String.self, forKey: Response.Game.CodingKeys.seasonDisplay)
+      self.dayNight = try container.decode(String.self, forKey: Response.Game.CodingKeys.dayNight)
+      self.scheduledInnings = try container.decode(Int.self, forKey: Response.Game.CodingKeys.scheduledInnings)
+      self.reverseHomeAwayStatus = try container.decode(Bool.self, forKey: Response.Game.CodingKeys.reverseHomeAwayStatus)
+      self.inningBreakLength = try container.decode(Int.self, forKey: Response.Game.CodingKeys.inningBreakLength)
+      self.gamesInSeries = try container.decode(Int.self, forKey: Response.Game.CodingKeys.gamesInSeries)
+      self.seriesGameNumber = try container.decode(Int.self, forKey: Response.Game.CodingKeys.seriesGameNumber)
+      self.seriesDescription = try container.decode(String.self, forKey: Response.Game.CodingKeys.seriesDescription)
+      self.recordSource = try container.decode(String.self, forKey: Response.Game.CodingKeys.recordSource)
+      self.ifNecessary = try container.decode(String.self, forKey: Response.Game.CodingKeys.ifNecessary)
+      self.ifNecessaryDescription = try container.decode(String.self, forKey: Response.Game.CodingKeys.ifNecessaryDescription)
+
+      let linescoreContainer = try container.nestedContainer(keyedBy: Response.Linescore.CodingKeys.self, forKey: .linescore)
+      if let _ = try linescoreContainer.decodeIfPresent(Int.self, forKey: .currentInning) {
+        self.linescore = try container.decodeIfPresent(Response.Linescore.self, forKey: Response.Game.CodingKeys.linescore)
+      } else {
+        self.linescore = nil
+      }
+    }
   }
   
   struct Teams: Decodable {
@@ -180,6 +248,59 @@ extension Response {
       let team = try values.nestedContainer(keyedBy: CodingKeys.self, forKey: .team)
       info = try team.decode(MLBTeam.self, forKey: .name)
       teamID = try team.decode(Int.self, forKey: .id)
+    }
+  }
+}
+
+enum Errors: Error {
+    case decodingError(String)
+}
+
+extension Response {
+  struct Linescore: Decodable {
+    let currentInning: Int // "currentInning": 8,
+    let currentInningOrdinal: String // "currentInningOrdinal": "8th",
+    let inningState: InningState  // "inningState": "Middle",
+    let inningHalf: String // "inningHalf": "Top",
+    let isTopInning: Bool // "isTopInning": true,
+    
+    enum CodingKeys: String, CodingKey {
+      case currentInning
+      case currentInningOrdinal
+      case inningState
+      case inningHalf
+      case isTopInning
+    }
+    
+    init(from decoder: any Decoder) throws {
+      let values = try decoder.container(keyedBy: CodingKeys.self)
+      guard let inning = try values.decodeIfPresent(Int.self, forKey: .currentInning) else {
+        throw Errors.decodingError("no inning")
+      }
+      currentInning = inning
+      currentInningOrdinal = try values.decode(String.self, forKey: .currentInningOrdinal)
+      inningState = try values.decode(InningState.self, forKey: .inningState)
+      inningHalf = try values.decode(String.self, forKey: .inningHalf)
+      isTopInning = try values.decode(Bool.self, forKey: .isTopInning)
+    }
+  }
+}
+
+extension Response {
+  enum InningState: String, Decodable {
+    case top = "Top"
+    case middle = "Middle"
+    case bottom = "Bottom"
+    
+    var shortName: String {
+      switch self {
+      case .top:
+        return "Top"
+      case .middle:
+        return "Mid"
+      case .bottom:
+        return "Bot"
+      }
     }
   }
 }
