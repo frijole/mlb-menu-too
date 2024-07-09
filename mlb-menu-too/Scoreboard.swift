@@ -197,9 +197,8 @@ extension Response {
       self.ifNecessary = try container.decode(String.self, forKey: Response.Game.CodingKeys.ifNecessary)
       self.ifNecessaryDescription = try container.decode(String.self, forKey: Response.Game.CodingKeys.ifNecessaryDescription)
 
-      let linescoreContainer = try container.nestedContainer(keyedBy: Response.Linescore.CodingKeys.self, forKey: .linescore)
-      if let _ = try linescoreContainer.decodeIfPresent(Int.self, forKey: .currentInning) {
-        self.linescore = try container.decodeIfPresent(Response.Linescore.self, forKey: Response.Game.CodingKeys.linescore)
+      if container.contains(.linescore), try container.nestedContainer(keyedBy: Response.Linescore.CodingKeys.self, forKey: .linescore).contains(.currentInning) {
+          self.linescore = try container.decodeIfPresent(Response.Linescore.self, forKey: Response.Game.CodingKeys.linescore)
       } else {
         self.linescore = nil
       }
