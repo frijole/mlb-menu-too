@@ -21,7 +21,7 @@ enum MLBTeam: String, Decodable {
   case twins = "Minnesota Twins"
   case mets = "New York Mets"
   case yankees = "New York Yankees"
-  case athletics = "Oakland Athletics"
+  case athletics = "Athletics"
   case phillies = "Philadelphia Phillies"
   case pirates = "Pittsburgh Pirates"
   case padres = "San Diego Padres"
