@@ -17,8 +17,8 @@ final class mlb_menu_too_tests: XCTestCase {
     XCTAssertNil(sampleGame.teams.home.score)
     XCTAssertNil(sampleGame.teams.away.score)
     
-    XCTAssertEqual(sampleGame.teams.home.name, .padres)
-    XCTAssertEqual(sampleGame.teams.away.name, .phillies)
+    XCTAssertEqual(sampleGame.teams.home.info, .padres)
+    XCTAssertEqual(sampleGame.teams.away.info, .phillies)
   }
   
   func test_decode_game_in_progress() throws {
