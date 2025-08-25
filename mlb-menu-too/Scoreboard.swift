@@ -254,6 +254,8 @@ extension Response {
   }
 }
 
+extension Response.Team: Equatable {}
+
 enum Errors: Error {
     case decodingError(String)
 }
